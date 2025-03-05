@@ -1,6 +1,10 @@
+import { LoginContainer } from "../presentation"
+
 const LoginPage = () => {
     return (
-        <div>LoginPage</div>
+        <div className='flex justify-center items-center w-screen h-screen'>
+            <LoginContainer />
+        </div>
     )
 }
 
