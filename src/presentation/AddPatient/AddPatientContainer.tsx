@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { PacientsMessageResponse, Patient } from '../../entities/patients';
 import AddPatientView from './AddPatientView'
 import { AppDispatch, RootState } from '../../state/store';
-import { createPacientsAsync } from '../../state/Slices/patientsSlice';
+import { createPacientsAsync } from '../../state/patientsSlice';
 import { Alert } from '../../components';
 import { useEffect, useState } from 'react';
 
