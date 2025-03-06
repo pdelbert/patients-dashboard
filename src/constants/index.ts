@@ -1,3 +1,22 @@
+export const ROUTES = {
+    LOGIN: '/',
+    PATIENTS: '/patients',
+    PATIENTS_ADD: '/patients/new',
+    PATIENTS_INFO: '/patients/:id',
+}
+
+export const CONSTANTS = {
+    TABLE_HEADER: [
+        "ID",
+        "NOMBRE",
+        "APELLIDO",
+        "EMAIL",
+        "COMPANY ID",
+        "CURP",
+        "ACTION"
+    ]
+}
+
 export const REQUEST_URL = {
     HEADERS: {
         'Accept': 'application/json',
