@@ -1,6 +1,14 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import { LoginPage, PatientAddPage, PatientInfoPage, PatientsPage } from "./pages"
+import { ROUTES } from './constants';
 import PrivateRoutes from "./utils/PrivateRoutes"
+
+import {
+  LoginPage,
+  PatientAddPage,
+  PatientInfoPage,
+  PatientsPage
+} from "./pages"
+
 
 function App() {
   return (
@@ -8,9 +16,9 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<PrivateRoutes />}>
-            <Route element={<PatientsPage />} path="/patients" />
-            <Route element={<PatientInfoPage />} path="/patients-info" />
-            <Route element={<PatientAddPage />} path="/patients/new" />
+            <Route element={<PatientsPage />} path={ROUTES.PATIENTS} />
+            <Route element={<PatientAddPage />} path={ROUTES.PATIENTS_ADD} />
+            <Route element={<PatientInfoPage />} path={ROUTES.PATIENTS_INFO} />
           </Route>
           <Route element={<LoginPage />} path="/" />
         </Routes>
