@@ -8,6 +8,8 @@ Instalación de dependencias y ejecución.
 npm i && npm run dev
 ```
 
+Se debe de agregar el `.env` con las variables de entorno requeridas para conectarse con `firebase`
+
 ---
 
 # Vistas
