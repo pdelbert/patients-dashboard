@@ -1,11 +1,17 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { Login, LoginState } from "../entities/login";
+import { Login, ILoginState } from "../entities/login";
 import loginUseCase from "../usecase/LoginUseCase";
   
-  const initialState: LoginState = {
-    token: null,
-    email: null
-  };
+const initialState: ILoginState = {
+  login: {
+    email: null,
+    token: null
+  },
+  loginMessage: {
+    text: "",
+    className: ""
+  }
+};
 
   const loginSlice = createSlice({
     name: 'login',
@@ -14,12 +20,20 @@ import loginUseCase from "../usecase/LoginUseCase";
     extraReducers: (builder) => {
       builder
         .addCase(loginAsync.fulfilled, (state, action) => {
-            state.token = action.payload.token;
-            state.email = action.payload.email;
+          if(action.payload.loginMessage) {
+            state.loginMessage = action.payload.loginMessage
+          }
+
+          if(action.payload.token) {
+            state.login.email = action.payload.email
+            state.login.token = action.payload.token
+          }
         })
-        .addCase(logOutAsync.fulfilled, (state, action) => {
-            state.token = action.payload.token;
-            state.email = action.payload.email;
+
+        // LogOut.
+        .addCase(logOutAsync.fulfilled, (state) => {
+            state.login.token = null
+            state.login.email = null
         });
     }
   });
@@ -35,11 +49,16 @@ import loginUseCase from "../usecase/LoginUseCase";
     "login/loginAsync",
     async (login: Login) => {
         const response = await loginUseCase().login(login);
-        if (!response) return initialState;
+        if (!response) {
+          return { loginMessage : {
+            text: "Login Error",
+            className: 'alert-error'
+          }};
+        } 
         
         return {
             email: login.email,
-            token: response?.token as string
+            token: response?.token
         };
     }
   );

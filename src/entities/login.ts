@@ -12,6 +12,16 @@ export interface LoginState {
     email: string | null
 }
 
+export interface LoginMessage {
+    text: string
+    className: string
+}
+
+export interface ILoginState {
+    login: LoginState;
+    loginMessage: LoginMessage
+}
+
 export interface LoginRepository {
     login: (login: Login) => Promise<LoginResponse | null>
 }

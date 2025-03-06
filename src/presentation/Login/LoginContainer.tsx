@@ -3,11 +3,12 @@ import { Login } from "../../entities/login";
 import LoginView from "./LoginView"
 import { AppDispatch, RootState } from "../../state/store";
 import { loginAsync } from "../../state/loginSlice";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const LoginContainer = () => {
     const dispatch = useDispatch<AppDispatch>();
-    const login = useSelector((state: RootState) => state.login);
+    const { login } = useSelector((state: RootState) => state.login);
+    const navigate = useNavigate();
 
     const formSubmit = (e: any) => {
         e.preventDefault();
@@ -22,7 +23,7 @@ const LoginContainer = () => {
     }
 
     // Redirect to /patients if token exists.
-    if (login.token) return <Navigate to="/patients" />;
+    if (login.token) { navigate('/patients') };
 
     // Render LoginView if token does not exist.
     return <LoginView formSubmit={formSubmit} />
