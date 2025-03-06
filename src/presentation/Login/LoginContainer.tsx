@@ -1,16 +1,29 @@
-import { useDispatch, useSelector } from "react-redux";
-import { Login } from "../../entities/login";
-import LoginView from "./LoginView"
-import { AppDispatch, RootState } from "../../state/store";
-import { loginAsync } from "../../state/loginSlice";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
+import { Login, LoginMessage } from '../../entities/login';
+
+import { loginAsync } from "../../state/loginSlice";
+import { AppDispatch, RootState } from "../../state/store";
+
+import LoginView from "./LoginView"
+import { Alert } from "../../components";
+
 
 const LoginContainer = () => {
+    const [loginResponse, setLoginResponse] = useState<LoginMessage | null>(null)
     const dispatch = useDispatch<AppDispatch>();
-    const { login } = useSelector((state: RootState) => state.login);
+    const { login, loginMessage } = useSelector((state: RootState) => state.login);
     const navigate = useNavigate();
 
-    const formSubmit = (e: any) => {
+    useEffect(() => {
+        setLoginResponse(loginMessage)
+        setTimeout(() => { setLoginResponse(null) }, 2000);
+    }, [loginMessage])
+
+
+    const formSubmit = async (e: any) => {
         e.preventDefault();
 
         const formData = new FormData(e.target);
@@ -26,7 +39,11 @@ const LoginContainer = () => {
     if (login.token) { navigate('/patients') };
 
     // Render LoginView if token does not exist.
-    return <LoginView formSubmit={formSubmit} />
+    return <>
+        {loginResponse?.text &&
+            <Alert className={loginMessage.className} title={loginMessage.text} />}
+        <LoginView formSubmit={formSubmit} />
+    </>
 }
 
 export default LoginContainer
