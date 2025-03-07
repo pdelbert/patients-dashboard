@@ -8,18 +8,24 @@ import { useEffect, useState } from 'react';
 
 const AddPatientContainer = () => {
     const dispatch = useDispatch<AppDispatch>();
+    const [btnDisabled, setBtnDisabled] = useState(false);
     const { login } = useSelector((state: RootState) => state.login);
     const { createdPatientResponse } = useSelector((state: RootState) => state.patients);
     const [patientResponse, setPatientsResponse] = useState<PacientsMessageResponse | null>(null)
 
     useEffect(() => {
         setPatientsResponse(createdPatientResponse)
-        setTimeout(() => { setPatientsResponse(null) }, 2000);
+        setTimeout(() => {
+            setBtnDisabled(false);
+            setPatientsResponse(null);
+        }, 2000);
     }, [createdPatientResponse])
 
     // Submit New User.
     const formSubmit = (e: any) => {
         e.preventDefault();
+
+        setBtnDisabled(true);
 
         const formData = new FormData(e.target);
 
@@ -43,7 +49,7 @@ const AddPatientContainer = () => {
                     title={createdPatientResponse.message}
                     className={createdPatientResponse.className as string} />}
 
-            <AddPatientView formSubmit={formSubmit} />
+            <AddPatientView formSubmit={formSubmit} btnDisabled={btnDisabled} />
         </div>
     )
 }

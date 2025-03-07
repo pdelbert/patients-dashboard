@@ -1,11 +1,12 @@
-import { Button } from "../../components"
+import { Loading } from "../../components"
 
 interface AddPatientViewProps {
     formSubmit: (e: any) => void
+    btnDisabled: boolean
 }
 
 
-const AddPatientView = ({ formSubmit }: AddPatientViewProps) => {
+const AddPatientView = ({ formSubmit, btnDisabled }: AddPatientViewProps) => {
     return (
         <>
             <form className="flex flex-col justify-center w-2xs" onSubmit={formSubmit}>
@@ -29,11 +30,9 @@ const AddPatientView = ({ formSubmit }: AddPatientViewProps) => {
                     <input type="text" name="curp" className="input" placeholder="Type here" />
                 </fieldset>
 
-                <Button
-                    text="AGREGAR PACIENTE"
-                    className="btn-success mt-6"
-                    onClick={() => console.log("Adding New Patient...")}
-                />
+                <button disabled={btnDisabled} className="btn btn-success mt-5" type="submit">
+                    {btnDisabled ? <Loading /> : "AGREGAR PACIENTE"}
+                </button>
             </form >
         </>
     )

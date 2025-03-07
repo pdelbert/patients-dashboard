@@ -12,6 +12,7 @@ import { Alert } from "../../components";
 
 
 const LoginContainer = () => {
+    const [btnDisabled, setBtnDisabled] = useState(false);
     const [loginResponse, setLoginResponse] = useState<LoginMessage | null>(null)
     const dispatch = useDispatch<AppDispatch>();
     const { login, loginMessage } = useSelector((state: RootState) => state.login);
@@ -19,13 +20,17 @@ const LoginContainer = () => {
 
     useEffect(() => {
         setLoginResponse(loginMessage)
-        setTimeout(() => { setLoginResponse(null) }, 2000);
+        setTimeout(() => {
+            setBtnDisabled(false);
+            setLoginResponse(null);
+        }, 2000);
     }, [loginMessage])
 
 
     const formSubmit = async (e: any) => {
         e.preventDefault();
 
+        setBtnDisabled(true);
         const formData = new FormData(e.target);
         const formEntries: Login = {
             email: formData.get('email') as string,
@@ -42,7 +47,7 @@ const LoginContainer = () => {
     return <>
         {loginResponse?.text &&
             <Alert className={loginMessage.className} title={loginMessage.text} />}
-        <LoginView formSubmit={formSubmit} />
+        <LoginView formSubmit={formSubmit} btnDisabled={btnDisabled} />
     </>
 }
 

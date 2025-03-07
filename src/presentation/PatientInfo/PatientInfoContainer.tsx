@@ -10,6 +10,7 @@ import { useParams } from "react-router"
 const PatientInfoContainer = () => {
     let params = useParams();
     const dispatch = useDispatch<AppDispatch>();
+    const [btnDisabled, setBtnDisabled] = useState(false);
     const { login } = useSelector((state: RootState) => state.login);
     const { patient, createdPatientResponse } = useSelector((state: RootState) => state.patients);
     const [patientData, setPatientData] = useState<Patient | null>(null)
@@ -34,12 +35,17 @@ const PatientInfoContainer = () => {
     // Display Error o Success Message after Submission.
     useEffect(() => {
         setPatientUpdateResponse(createdPatientResponse)
-        setTimeout(() => { setPatientUpdateResponse(null) }, 2000);
+        setTimeout(() => {
+            setBtnDisabled(false);
+            setPatientUpdateResponse(null)
+        }, 2000);
     }, [createdPatientResponse])
 
 
     const formSubmit = (e: any) => {
         e.preventDefault();
+
+        setBtnDisabled(true);
 
         const data: Patient = {
             id: params.id as string,
@@ -69,6 +75,7 @@ const PatientInfoContainer = () => {
                 formSubmit={formSubmit}
                 patientData={patientData}
                 setPatientData={setPatientData}
+                btnDisabled={btnDisabled}
             />
         </div>
     )

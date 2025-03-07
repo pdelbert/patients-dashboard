@@ -1,8 +1,11 @@
+import { Loading } from "../../components"
+
 interface LoginViewProps {
     formSubmit: (e: any) => void
+    btnDisabled: boolean
 }
 
-const LoginView = ({ formSubmit }: LoginViewProps) => {
+const LoginView = ({ formSubmit, btnDisabled }: LoginViewProps) => {
     return (
         <>
             <form className="flex flex-col justify-center w-2xs" onSubmit={formSubmit}>
@@ -16,7 +19,9 @@ const LoginView = ({ formSubmit }: LoginViewProps) => {
                     <input type="password" name="password" className="input" placeholder="Password" />
                 </fieldset>
 
-                <button className="btn btn-success mt-5" type="submit">Login</button>
+                <button disabled={btnDisabled} className="btn btn-success mt-5" type="submit">
+                    {btnDisabled ? <Loading /> : "LOGIN"}
+                </button>
             </form >
         </>
     )
