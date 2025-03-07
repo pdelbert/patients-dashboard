@@ -1,16 +1,19 @@
+import Loading from "./Loading"
+
 interface ButtonProps {
     text: string
     className: string
-    onClick: (e: React.MouseEvent<HTMLButtonElement>) => void
+    disabled: boolean
+    onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
 }
 
-const Button = ({ className, text, onClick }: ButtonProps) => {
+const Button = ({ className, text, disabled }: ButtonProps) => {
     const BASE_CLASS = `btn ${className}`
     return (
         <button
-            className={BASE_CLASS}
-            onClick={onClick}>
-            {text}
+            disabled={disabled}
+            className={BASE_CLASS}>
+            {disabled ? <Loading /> : text}
         </button>
     )
 }
