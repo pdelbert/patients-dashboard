@@ -1,5 +1,5 @@
 import { NavBar } from "../components"
-import AddPatientContainer from "../presentation/AddPatient/AddPatientContainer"
+import { AddPatientContainer } from "../presentation"
 
 const PatientAddPage = () => {
     return (
