@@ -13,6 +13,7 @@ const successIcon = <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 s
 </svg>
 
 const Alert = ({ title, className }: AlertProps) => {
+
     const BASE_CLASS = `alert ${className} absolute top-0 w-full`;
     const ICON = className === 'alert-error' ? errorIcon : successIcon;
 

@@ -9,22 +9,22 @@ import { AppDispatch, RootState } from "../../state/store";
 
 import LoginView from "./LoginView"
 import { Alert } from "../../components";
+import { loginSchema } from "../../zod";
 
 
 const LoginContainer = () => {
     const [btnDisabled, setBtnDisabled] = useState(false);
     const [loginResponse, setLoginResponse] = useState<LoginMessage | null>(null)
     const dispatch = useDispatch<AppDispatch>();
-    const { login, loginMessage } = useSelector((state: RootState) => state.login);
+    const { login } = useSelector((state: RootState) => state.login);
     const navigate = useNavigate();
 
     useEffect(() => {
-        setLoginResponse(loginMessage)
         setTimeout(() => {
             setBtnDisabled(false);
             setLoginResponse(null);
         }, 2000);
-    }, [loginMessage])
+    }, [loginResponse])
 
 
     const formSubmit = async (e: any) => {
@@ -37,7 +37,12 @@ const LoginContainer = () => {
             password: formData.get('password') as string
         };
 
-        dispatch(loginAsync(formEntries));
+        const response = loginSchema.safeParse(formEntries);
+
+        (response.success)
+            ? dispatch(loginAsync(formEntries))
+            : setLoginResponse({ text: 'Input Error', className: 'alert-error' });
+
     }
 
     // Redirect to /patients if token exists.
@@ -46,7 +51,7 @@ const LoginContainer = () => {
     // Render LoginView if token does not exist.
     return <>
         {loginResponse?.text &&
-            <Alert className={loginMessage.className} title={loginMessage.text} />}
+            <Alert className={loginResponse.className} title={loginResponse.text} />}
         <LoginView formSubmit={formSubmit} btnDisabled={btnDisabled} />
     </>
 }
