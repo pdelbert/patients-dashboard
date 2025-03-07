@@ -49,7 +49,7 @@ const AddPatientContainer = () => {
                     title={createdPatientResponse.message}
                     className={createdPatientResponse.className as string} />}
 
-            <AddPatientView formSubmit={formSubmit} btnDisabled={btnDisabled} />
+            <AddPatientView formSubmit={formSubmit} disabled={btnDisabled} />
         </div>
     )
 }

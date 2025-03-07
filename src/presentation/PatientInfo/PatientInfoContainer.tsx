@@ -75,7 +75,7 @@ const PatientInfoContainer = () => {
                 formSubmit={formSubmit}
                 patientData={patientData}
                 setPatientData={setPatientData}
-                btnDisabled={btnDisabled}
+                disabled={btnDisabled}
             />
         </div>
     )

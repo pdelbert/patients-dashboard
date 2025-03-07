@@ -1,14 +1,14 @@
-import { Loading } from "../../components"
+import { Button } from "../../components"
 import { Patient } from "../../entities/patients"
 
 interface PatientInfoViewProps {
     formSubmit: (e: any) => void
     patientData: Patient | null
     setPatientData: React.Dispatch<React.SetStateAction<Patient | null>>
-    btnDisabled: boolean
+    disabled: boolean
 }
 
-const PatientInfoView = ({ formSubmit, setPatientData, patientData, btnDisabled }: PatientInfoViewProps) => {
+const PatientInfoView = ({ formSubmit, setPatientData, patientData, disabled }: PatientInfoViewProps) => {
     return (
         <>
             <form className="flex flex-col justify-center w-2xs" onSubmit={formSubmit}>
@@ -61,9 +61,12 @@ const PatientInfoView = ({ formSubmit, setPatientData, patientData, btnDisabled 
                     />
                 </fieldset>
 
-                <button disabled={btnDisabled} className="btn btn-success mt-5" type="submit">
-                    {btnDisabled ? <Loading /> : "MODIFICAR PACIENTE"}
-                </button>
+                <Button
+                    disabled={disabled}
+                    text="MODIFICAR PACIENTE"
+                    className="btn-success mt-5"
+                />
+
             </form >
         </>
     )
