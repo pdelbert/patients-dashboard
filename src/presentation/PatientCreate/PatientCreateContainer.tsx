@@ -6,10 +6,11 @@ import { createPacientsAsync } from '../../state/patientsSlice';
 import { Alert } from '../../components';
 import { useEffect, useState } from 'react';
 import { patientSchema } from '../../zod';
+import { CONSTANTS } from '../../constants';
 
 const PatientCreateContainer = () => {
     const dispatch = useDispatch<AppDispatch>();
-    const [btnDisabled, setBtnDisabled] = useState(false);
+    const [disabled, setDisabled] = useState(false);
     const { login } = useSelector((state: RootState) => state.login);
     const { createdPatientResponse } = useSelector((state: RootState) => state.patients);
     const [patientResponse, setPatientResponse] = useState<PacientsMessageResponse | null>(null)
@@ -28,17 +29,19 @@ const PatientCreateContainer = () => {
 
 
     const initialState = () => {
-        setTimeout(() => {
-            setBtnDisabled(false);
+        const timer = setTimeout(() => {
+            setDisabled(false);
             setPatientResponse(null)
-        }, 2000);
+        }, CONSTANTS.TIMER);
+
+        return () => clearTimeout(timer);
     }
 
     // Submit New User.
     const formSubmit = (e: any) => {
         e.preventDefault();
 
-        setBtnDisabled(true);
+        setDisabled(true);
 
         const formData = new FormData(e.target);
 
@@ -67,7 +70,7 @@ const PatientCreateContainer = () => {
                     title={patientResponse.message}
                     className={patientResponse.className as string} />}
 
-            <PatientCreateView formSubmit={formSubmit} disabled={btnDisabled} />
+            <PatientCreateView formSubmit={formSubmit} disabled={disabled} />
         </div>
     )
 }

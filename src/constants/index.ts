@@ -14,7 +14,8 @@ export const CONSTANTS = {
         "COMPANY ID",
         "CURP",
         "ACTION"
-    ]
+    ],
+    TIMER: 2500
 }
 
 export const REQUEST_URL = {

@@ -1,21 +1,22 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router"
+import { useDispatch, useSelector } from "react-redux";
 import PatientUpdateView from "./PatientUpdateView"
 import { PacientsMessageResponse, Patient, PatientDataRequest } from "../../entities/patients";
-import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../state/store";
 import { getPacientDataAsync, UpdatePacientDataAsync } from "../../state/patientsSlice";
 import { Alert, Loading } from "../../components";
-import { useParams } from "react-router"
 import { patientSchema } from "../../zod";
+import { CONSTANTS } from "../../constants";
 
 const PatientUpdateContainer = () => {
-    let params = useParams();
     const dispatch = useDispatch<AppDispatch>();
-    const [btnDisabled, setBtnDisabled] = useState(false);
+    const [disabled, setDisabled] = useState(false);
     const { login } = useSelector((state: RootState) => state.login);
     const { patient, createdPatientResponse } = useSelector((state: RootState) => state.patients);
     const [patientData, setPatientData] = useState<Patient | null>(null)
     const [patientUpdateResponse, setPatientUpdateResponse] = useState<PacientsMessageResponse | null>(null)
+    const params = useParams();
 
     // On Mount, fetch patient Data.
     useEffect(() => {
@@ -36,24 +37,26 @@ const PatientUpdateContainer = () => {
     }, [createdPatientResponse]);
 
 
-    // Display Error Message base in Zod Validation.
+    // Hide Error Message base in Zod Validation.
     useEffect(() => {
         initialState();
     }, [patientUpdateResponse])
 
 
     const initialState = () => {
-        setTimeout(() => {
-            setBtnDisabled(false);
+        const timer = setTimeout(() => {
+            setDisabled(false);
             setPatientUpdateResponse(null)
-        }, 2000);
+        }, CONSTANTS.TIMER);
+
+        return () => clearTimeout(timer);
     }
 
 
     const formSubmit = (e: any) => {
         e.preventDefault();
 
-        setBtnDisabled(true);
+        setDisabled(true);
 
         const formEntries: Patient = {
             id: params.id as string,
@@ -87,7 +90,7 @@ const PatientUpdateContainer = () => {
                 formSubmit={formSubmit}
                 patientData={patientData}
                 setPatientData={setPatientData}
-                disabled={btnDisabled}
+                disabled={disabled}
             />
         </div>
     )

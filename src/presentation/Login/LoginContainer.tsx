@@ -11,6 +11,7 @@ import LoginView from "./LoginView"
 import { Alert } from "../../components";
 import { loginSchema } from "../../zod";
 import { PacientsMessageResponse } from "../../entities/patients";
+import { CONSTANTS } from "../../constants";
 
 
 const LoginContainer = () => {
@@ -21,10 +22,12 @@ const LoginContainer = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        setTimeout(() => {
+        const timer = setTimeout(() => {
             setDisabled(false);
             setPatientsResponse(null);
-        }, 2000);
+        }, CONSTANTS.TIMER);
+
+        return () => clearTimeout(timer);
     }, [patientResponse])
 
 
@@ -47,8 +50,10 @@ const LoginContainer = () => {
 
     }
 
+
     // Redirect to /patients if token exists.
     if (login.token) { navigate('/patients') };
+
 
     // Render LoginView if token does not exist.
     return <>
