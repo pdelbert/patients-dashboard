@@ -12,6 +12,7 @@ const PatientUpdateView = ({ formSubmit, setPatientData, patientData, disabled }
     return (
         <>
             <form className="flex flex-col justify-center w-2xs" onSubmit={formSubmit}>
+
                 <fieldset className="fieldset">
                     <legend className="fieldset-legend">Nombre</legend>
                     <input
@@ -34,7 +35,6 @@ const PatientUpdateView = ({ formSubmit, setPatientData, patientData, disabled }
                         value={patientData?.last_name as string}
                         onChange={(e) => setPatientData(prev => prev ? { ...prev, last_name: e.target.value } : prev)}
                     />
-
                 </fieldset>
 
                 <fieldset className="fieldset">
@@ -47,7 +47,6 @@ const PatientUpdateView = ({ formSubmit, setPatientData, patientData, disabled }
                         value={patientData?.email as string}
                         onChange={(e) => setPatientData(prev => prev ? { ...prev, email: e.target.value } : prev)}
                     />
-
                 </fieldset>
 
                 <fieldset className="fieldset">
@@ -60,7 +59,6 @@ const PatientUpdateView = ({ formSubmit, setPatientData, patientData, disabled }
                         value={patientData?.company_id as string}
                         onChange={(e) => setPatientData(prev => prev ? { ...prev, company_id: e.target.value } : prev)}
                     />
-
                 </fieldset>
 
                 <fieldset className="fieldset">

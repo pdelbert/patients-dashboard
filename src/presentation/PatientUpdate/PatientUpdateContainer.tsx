@@ -82,9 +82,7 @@ const PatientUpdateContainer = () => {
     return (
         <div className=" p-6 w-auto flex justify-center items-center h-screen">
             {patientUpdateResponse?.message &&
-                <Alert
-                    title={patientUpdateResponse.message}
-                    className={patientUpdateResponse.className as string} />}
+                <Alert title={patientUpdateResponse.message} className={patientUpdateResponse.className as string} />}
 
             <PatientUpdateView
                 formSubmit={formSubmit}

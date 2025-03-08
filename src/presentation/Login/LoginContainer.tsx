@@ -58,9 +58,7 @@ const LoginContainer = () => {
     // Render LoginView if token does not exist.
     return <>
         {patientResponse?.message &&
-            <Alert
-                title={patientResponse.message}
-                className={patientResponse.className as string} />}
+            <Alert title={patientResponse.message} className={patientResponse.className as string} />}
 
         <LoginView formSubmit={formSubmit} disabled={disabled} />
     </>

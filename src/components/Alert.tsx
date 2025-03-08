@@ -9,7 +9,7 @@ const Alert = ({ title, className }: AlertProps) => {
     const BASE_CLASS = `alert ${className} absolute top-0 w-full`;
     const AlertIcon = className === 'alert-error' ? ErrorIcon : SuccessIcon;
 
-    return (
+    return title && (
         <div role="alert" className={BASE_CLASS}>
             <AlertIcon />
             <span>{title}</span>

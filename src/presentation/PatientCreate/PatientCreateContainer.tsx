@@ -66,9 +66,7 @@ const PatientCreateContainer = () => {
     return (
         <div className=" p-6 w-auto flex justify-center items-center h-screen">
             {patientResponse?.message &&
-                <Alert
-                    title={patientResponse.message}
-                    className={patientResponse.className as string} />}
+                <Alert title={patientResponse.message} className={patientResponse.className as string} />}
 
             <PatientCreateView formSubmit={formSubmit} disabled={disabled} />
         </div>
