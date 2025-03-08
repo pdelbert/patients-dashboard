@@ -34,4 +34,4 @@ Modificar datos de paciente
 
 ## Estructura de la aplicación
 
-![1741285274804](image/README/1741285274804.png)
+![1741463695790](image/README/1741463695790.png)
