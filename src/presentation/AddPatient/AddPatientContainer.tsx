@@ -34,7 +34,7 @@ const AddPatientContainer = () => {
             last_name: formData.get('last_name') as string,
             email: formData.get('email') as string,
             curp: formData.get('curp') as string,
-            company_id: '1',
+            company_id: formData.get('company_id') as string,
             active: true,
             token: login.token as string
         };

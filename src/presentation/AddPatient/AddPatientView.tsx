@@ -26,6 +26,11 @@ const AddPatientView = ({ formSubmit, disabled }: AddPatientViewProps) => {
                 </fieldset>
 
                 <fieldset className="fieldset">
+                    <legend className="fieldset-legend">Company ID</legend>
+                    <input type="text" name="company_id" className="input" disabled={disabled} />
+                </fieldset>
+
+                <fieldset className="fieldset">
                     <legend className="fieldset-legend">CURP</legend>
                     <input type="text" name="curp" className="input" disabled={disabled} />
                 </fieldset>
