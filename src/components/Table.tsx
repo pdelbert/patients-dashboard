@@ -12,7 +12,12 @@ const Table = ({ header, data }: TableProps) => {
             <table className="table table-zebra">
                 <thead>
                     <tr>
-                        {header.map((h, i) => <th key={i}>{h}</th>)}
+                        {header.map((h, i) => {
+                            return i < header.length - 1
+                                ? <th key={i}>{h}</th>
+                                : <th className="flex justify-end" key={i}>{h}</th>
+                        }
+                        )}
                     </tr>
                 </thead>
                 <tbody>
@@ -25,8 +30,8 @@ const Table = ({ header, data }: TableProps) => {
                                 <td>{d.email}</td>
                                 <td>{d.company_id}</td>
                                 <td>{d.curp}</td>
-                                <td>
-                                    <Link to={`/patients/${d.id}`} ><button className="btn btn-accent mr-3">Ver</button></Link>
+                                <td className="flex justify-end">
+                                    <Link to={`/patients/${d.id}`} ><button className="btn btn-accent">Ver</button></Link>
                                 </td>
                             </tr>
                         ))
