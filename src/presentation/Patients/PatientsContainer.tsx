@@ -54,7 +54,7 @@ const PatientsContainer = () => {
     if (!patients.length) return <Loading />;
 
     // Render PatientsView Component.
-    return <div className=" p-6 w-auto">
+    return <div className=" p-6 pt-0 w-auto">
         <PatientsView
             handlerSearch={handlerSearch}
             handleAddUser={handleAddUser}
