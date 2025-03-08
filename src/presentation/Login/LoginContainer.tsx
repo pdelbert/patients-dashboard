@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Login, LoginMessage } from '../../entities/login';
+import { Login } from '../../entities/login';
 
 import { loginAsync } from "../../state/loginSlice";
 import { AppDispatch, RootState } from "../../state/store";
@@ -10,27 +10,29 @@ import { AppDispatch, RootState } from "../../state/store";
 import LoginView from "./LoginView"
 import { Alert } from "../../components";
 import { loginSchema } from "../../zod";
+import { PacientsMessageResponse } from "../../entities/patients";
 
 
 const LoginContainer = () => {
     const [disabled, setDisabled] = useState(false);
-    const [loginResponse, setLoginResponse] = useState<LoginMessage | null>(null)
     const dispatch = useDispatch<AppDispatch>();
     const { login } = useSelector((state: RootState) => state.login);
+    const [patientResponse, setPatientsResponse] = useState<PacientsMessageResponse | null>(null)
     const navigate = useNavigate();
 
     useEffect(() => {
         setTimeout(() => {
             setDisabled(false);
-            setLoginResponse(null);
+            setPatientsResponse(null);
         }, 2000);
-    }, [loginResponse])
+    }, [patientResponse])
 
 
     const formSubmit = async (e: any) => {
         e.preventDefault();
 
         setDisabled(true);
+
         const formData = new FormData(e.target);
         const formEntries: Login = {
             email: formData.get('email') as string,
@@ -41,7 +43,7 @@ const LoginContainer = () => {
 
         (response.success)
             ? dispatch(loginAsync(formEntries))
-            : setLoginResponse({ text: 'Input Error', className: 'alert-error' });
+            : setPatientsResponse({ message: 'Input Error', className: 'alert-error' });
 
     }
 
@@ -50,8 +52,11 @@ const LoginContainer = () => {
 
     // Render LoginView if token does not exist.
     return <>
-        {loginResponse?.text &&
-            <Alert className={loginResponse.className} title={loginResponse.text} />}
+        {patientResponse?.message &&
+            <Alert
+                title={patientResponse.message}
+                className={patientResponse.className as string} />}
+
         <LoginView formSubmit={formSubmit} disabled={disabled} />
     </>
 }
