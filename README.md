@@ -20,7 +20,7 @@ Login
 
 Lista de pacientes
 
-![1741284755345](image/README/1741284755345.png)
+![1741456393699](image/README/1741456393699.png)
 
 Agregar Paciente
 
