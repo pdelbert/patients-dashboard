@@ -1,11 +1,16 @@
 import  {REQUEST_URL} from "../constants";
-import { PacientsMessageResponse, Patient, PatientDataRequest, PatientRepository } from "../entities/patients";
+import { PacientsMessageResponse, Patient, PatientDataRequest, PatientRepository, RequestPatientByPagination } from "../entities/patients";
 
 const PatientRepositoryImpl = () :PatientRepository =>  ({
 
-    all: async (token): Promise<Patient[] | null> => {
+    
+
+    all: async (requestByPagination: RequestPatientByPagination): Promise<Patient[] | null> => {
         try {
-            const response = await fetch(REQUEST_URL.PATIENTS, {
+                
+            const {token, pagination} = requestByPagination;
+
+            const response = await fetch( `${REQUEST_URL.PATIENTS}?per_page=10&page=${pagination}`, {
                 method: 'GET',
                 headers: {'Authorization': `Bearer ${token}`}
             });

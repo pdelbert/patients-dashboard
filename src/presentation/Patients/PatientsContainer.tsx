@@ -21,8 +21,8 @@ const PatientsContainer = () => {
 
     // On Mount, fetch patients list.
     useEffect(() => {
-        dispatch(getPacientsAsync(login.token as string));
-    }, []);
+        dispatch(getPacientsAsync({ token: login.token as string, pagination: pagination }));
+    }, [pagination]);
 
     useEffect(() => {
         setPatientsList(patients)

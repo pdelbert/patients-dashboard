@@ -26,8 +26,13 @@ export interface PatientsState {
     createdPatientResponse: PacientsMessageResponse
 }
 
+export interface RequestPatientByPagination {
+    token: string
+    pagination: number
+}
+
 export interface PatientRepository {
-    all: (token: string) => Promise<Patient[] | null>
+    all: (requestByPagination: RequestPatientByPagination) => Promise<Patient[] | null>
     filterPatients?: (inputValue: string, patients: Patient[]) => Patient[]
     create: (patient: Patient) => Promise<PacientsMessageResponse>
     read: (patient: PatientDataRequest) => Promise<Patient | null>

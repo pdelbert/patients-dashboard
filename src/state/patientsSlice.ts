@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { Patient, PatientDataRequest, PatientsState } from "../entities/patients";
+import { Patient, PatientDataRequest, PatientsState, RequestPatientByPagination } from "../entities/patients";
 import PatientUseCase from "../usecase/PatientUseCase";
 
 const initialState: PatientsState = {
@@ -21,8 +21,8 @@ const initialState: PatientsState = {
 
 export const getPacientsAsync = createAsyncThunk(
     "patients/getPacientsAsync",
-    async (token: string) => {
-        return await PatientUseCase().all(token);
+    async (requestByPagination: RequestPatientByPagination) => {
+        return await PatientUseCase().all(requestByPagination);
     }
 );
 

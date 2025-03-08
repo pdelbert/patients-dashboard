@@ -1,11 +1,11 @@
-import { PacientsMessageResponse, Patient, PatientDataRequest, PatientRepository } from "../entities/patients";
+import { PacientsMessageResponse, Patient, PatientDataRequest, PatientRepository, RequestPatientByPagination } from "../entities/patients";
 import PatientRepositoryImpl from "../infrastructure/PatientRepositoryImpl";
 
 const PatientUseCase = (): PatientRepository => ({
     
     // Get All Pacients.
-    all: async(token: string): Promise<Patient[] | null> => {
-        return await PatientRepositoryImpl().all(token);
+    all: async(requestByPagination: RequestPatientByPagination): Promise<Patient[] | null> => {
+        return await PatientRepositoryImpl().all(requestByPagination);
     },
 
     // Create New Pacients.
