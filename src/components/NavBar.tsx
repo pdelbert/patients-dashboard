@@ -10,7 +10,7 @@ const NavBar = () => {
     const handleLogOut = () => dispatch(logOutAsync());
 
     return (
-        <div className="navbar bg-base-100 shadow-sm mb-5">
+        <div className="navbar sticky top-0 z-50 bg-base-100 shadow-sm">
             <div className="flex-1">
                 <a className="btn btn-ghost text-xl">Patients Dashboard</a>
             </div>
@@ -19,7 +19,7 @@ const NavBar = () => {
                     <li>
                         <details>
                             <summary>{login.email}</summary>
-                            <ul className="bg-base-100 rounded-t-none p-2">
+                            <ul className="bg-base-100 w-full border border-gray-500 rounded-t-none">
                                 <li><Link to="/patients">Lista de Pacientes</Link></li>
                                 <li><Link to="/patients/new">Agregar Paciente</Link></li>
                                 <li><a onClick={handleLogOut}>LogOut</a></li>
