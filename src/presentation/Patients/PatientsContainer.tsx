@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 const PatientsContainer = () => {
+    const [pagination, setPagination] = useState<number>(1);
     const [patientsList, setPatientsList] = useState<Patient[]>([])
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
@@ -44,6 +45,10 @@ const PatientsContainer = () => {
         navigate(ROUTES.PATIENTS_ADD)
     }
 
+    const handlePagination = (action: string) => {
+        setPagination(prev => action === 'prev' ? Math.max(prev -= 1, 1) : prev += 1);
+    }
+
 
     // Loading Flag Pattern.
     if (!patients.length) return <Loading />;
@@ -55,6 +60,8 @@ const PatientsContainer = () => {
             handleAddUser={handleAddUser}
             patients={patientsList}
             tableHeader={CONSTANTS.TABLE_HEADER}
+            handlePagination={handlePagination}
+            pagination={pagination}
         />
     </div>
 }
