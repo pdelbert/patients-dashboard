@@ -6,6 +6,7 @@ import Button from './Button'
 import Alert from './Alert'
 import ErrorIcon from './ErrorIcon'
 import SuccessIcon from './SuccessIcon'
+import Pagination from './Pagination'
 
 export {
     NavBar,
@@ -15,5 +16,6 @@ export {
     Button,
     Alert,
     ErrorIcon,
-    SuccessIcon
+    SuccessIcon,
+    Pagination
 }
