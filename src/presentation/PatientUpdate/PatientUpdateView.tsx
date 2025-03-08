@@ -1,14 +1,14 @@
 import { Button } from "../../components"
 import { Patient } from "../../entities/patients"
 
-interface PatientInfoViewProps {
+interface PatientUpdateProps {
     formSubmit: (e: any) => void
     patientData: Patient | null
     setPatientData: React.Dispatch<React.SetStateAction<Patient | null>>
     disabled: boolean
 }
 
-const PatientInfoView = ({ formSubmit, setPatientData, patientData, disabled }: PatientInfoViewProps) => {
+const PatientUpdateView = ({ formSubmit, setPatientData, patientData, disabled }: PatientUpdateProps) => {
     return (
         <>
             <form className="flex flex-col justify-center w-2xs" onSubmit={formSubmit}>
@@ -86,4 +86,4 @@ const PatientInfoView = ({ formSubmit, setPatientData, patientData, disabled }: 
     )
 }
 
-export default PatientInfoView
+export default PatientUpdateView

@@ -19,7 +19,7 @@ const PatientsContainer = () => {
     const { login } = useSelector((state: RootState) => state.login);
     const { patients } = useSelector((state: RootState) => state.patients);
 
-    // On Mount, fetch patients list.
+    // fetch patients list.
     useEffect(() => {
         dispatch(getPacientsAsync({ token: login.token as string, pagination: pagination }));
     }, [pagination]);

@@ -31,6 +31,11 @@ export interface RequestPatientByPagination {
     pagination: number
 }
 
+export interface PatientMessage {
+    text: string
+    className: string
+}
+
 export interface PatientRepository {
     all: (requestByPagination: RequestPatientByPagination) => Promise<Patient[] | null>
     filterPatients?: (inputValue: string, patients: Patient[]) => Patient[]

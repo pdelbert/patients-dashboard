@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import PatientInfoView from "./PatientInfoView"
+import PatientUpdateView from "./PatientUpdateView"
 import { PacientsMessageResponse, Patient, PatientDataRequest } from "../../entities/patients";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../state/store";
 import { getPacientDataAsync, UpdatePacientDataAsync } from "../../state/patientsSlice";
 import { Alert, Loading } from "../../components";
 import { useParams } from "react-router"
+import { patientSchema } from "../../zod";
 
-const PatientInfoContainer = () => {
+const PatientUpdateContainer = () => {
     let params = useParams();
     const dispatch = useDispatch<AppDispatch>();
     const [btnDisabled, setBtnDisabled] = useState(false);
@@ -35,11 +36,22 @@ const PatientInfoContainer = () => {
     // Display Error o Success Message after Submission.
     useEffect(() => {
         setPatientUpdateResponse(createdPatientResponse)
+        initialState();
+    }, [createdPatientResponse]);
+
+
+    // Display Error Message base in Zod Validation.
+    useEffect(() => {
+        initialState();
+    }, [patientUpdateResponse])
+
+
+    const initialState = () => {
         setTimeout(() => {
             setBtnDisabled(false);
             setPatientUpdateResponse(null)
         }, 2000);
-    }, [createdPatientResponse])
+    }
 
 
     const formSubmit = (e: any) => {
@@ -47,7 +59,7 @@ const PatientInfoContainer = () => {
 
         setBtnDisabled(true);
 
-        const data: Patient = {
+        const formEntries: Patient = {
             id: params.id as string,
             token: login.token as string,
             name: patientData?.name as string,
@@ -58,7 +70,11 @@ const PatientInfoContainer = () => {
             active: patientData?.active || false
         }
 
-        dispatch(UpdatePacientDataAsync(data));
+        const response = patientSchema.safeParse(formEntries);
+
+        (response.success)
+            ? dispatch(UpdatePacientDataAsync(formEntries))
+            : setPatientUpdateResponse({ message: 'Input Error', className: 'alert-error' });
     }
 
     // Loading Flag Pattern.
@@ -71,7 +87,7 @@ const PatientInfoContainer = () => {
                     title={patientUpdateResponse.message}
                     className={patientUpdateResponse.className as string} />}
 
-            <PatientInfoView
+            <PatientUpdateView
                 formSubmit={formSubmit}
                 patientData={patientData}
                 setPatientData={setPatientData}
@@ -81,4 +97,4 @@ const PatientInfoContainer = () => {
     )
 }
 
-export default PatientInfoContainer
+export default PatientUpdateContainer

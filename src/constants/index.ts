@@ -2,7 +2,7 @@ export const ROUTES = {
     LOGIN: '/',
     PATIENTS: '/patients',
     PATIENTS_ADD: '/patients/new',
-    PATIENTS_INFO: '/patients/:id',
+    PATIENT_UPDATE: '/patients/:id',
 }
 
 export const CONSTANTS = {

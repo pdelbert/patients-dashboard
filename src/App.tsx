@@ -5,7 +5,7 @@ import PrivateRoutes from "./utils/PrivateRoutes"
 import {
   LoginPage,
   PatientAddPage,
-  PatientInfoPage,
+  PatientUpdatePage,
   PatientsPage
 } from "./pages"
 
@@ -18,7 +18,7 @@ function App() {
           <Route element={<PrivateRoutes />}>
             <Route element={<PatientsPage />} path={ROUTES.PATIENTS} />
             <Route element={<PatientAddPage />} path={ROUTES.PATIENTS_ADD} />
-            <Route element={<PatientInfoPage />} path={ROUTES.PATIENTS_INFO} />
+            <Route element={<PatientUpdatePage />} path={ROUTES.PATIENT_UPDATE} />
           </Route>
           <Route element={<LoginPage />} path="/" />
         </Routes>
