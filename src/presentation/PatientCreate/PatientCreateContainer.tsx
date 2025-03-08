@@ -1,25 +1,38 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { PacientsMessageResponse, Patient } from '../../entities/patients';
-import AddPatientView from './AddPatientView'
+import PatientCreateView from './PatientCreateView'
 import { AppDispatch, RootState } from '../../state/store';
 import { createPacientsAsync } from '../../state/patientsSlice';
 import { Alert } from '../../components';
 import { useEffect, useState } from 'react';
+import { patientSchema } from '../../zod';
 
-const AddPatientContainer = () => {
+const PatientCreateContainer = () => {
     const dispatch = useDispatch<AppDispatch>();
     const [btnDisabled, setBtnDisabled] = useState(false);
     const { login } = useSelector((state: RootState) => state.login);
     const { createdPatientResponse } = useSelector((state: RootState) => state.patients);
-    const [patientResponse, setPatientsResponse] = useState<PacientsMessageResponse | null>(null)
+    const [patientResponse, setPatientResponse] = useState<PacientsMessageResponse | null>(null)
 
+
+    // Display Error o Success Message after Submission.
     useEffect(() => {
-        setPatientsResponse(createdPatientResponse)
+        setPatientResponse(createdPatientResponse)
+        initialState();
+    }, [createdPatientResponse])
+
+    // Display Error Message base in Zod Validation.
+    useEffect(() => {
+        initialState();
+    }, [patientResponse])
+
+
+    const initialState = () => {
         setTimeout(() => {
             setBtnDisabled(false);
-            setPatientsResponse(null);
+            setPatientResponse(null)
         }, 2000);
-    }, [createdPatientResponse])
+    }
 
     // Submit New User.
     const formSubmit = (e: any) => {
@@ -39,19 +52,24 @@ const AddPatientContainer = () => {
             token: login.token as string
         };
 
-        dispatch(createPacientsAsync(formEntries));
+        const response = patientSchema.safeParse(formEntries);
+
+        (response.success)
+            ? dispatch(createPacientsAsync(formEntries))
+            : setPatientResponse({ message: 'Input Error', className: 'alert-error' });
+
     }
 
     return (
         <div className=" p-6 w-auto flex justify-center items-center h-screen">
             {patientResponse?.message &&
                 <Alert
-                    title={createdPatientResponse.message}
-                    className={createdPatientResponse.className as string} />}
+                    title={patientResponse.message}
+                    className={patientResponse.className as string} />}
 
-            <AddPatientView formSubmit={formSubmit} disabled={btnDisabled} />
+            <PatientCreateView formSubmit={formSubmit} disabled={btnDisabled} />
         </div>
     )
 }
 
-export default AddPatientContainer
+export default PatientCreateContainer

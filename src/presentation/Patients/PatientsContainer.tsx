@@ -42,7 +42,7 @@ const PatientsContainer = () => {
 
     // Redirect to add user page.
     const handleAddUser = () => {
-        navigate(ROUTES.PATIENTS_ADD)
+        navigate(ROUTES.PATIENT_CREATE)
     }
 
     const handlePagination = (action: string) => {

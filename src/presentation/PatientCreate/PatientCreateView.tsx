@@ -1,12 +1,12 @@
 import { Button } from "../../components"
 
-interface AddPatientViewProps {
+interface PatientCreateProps {
     formSubmit: (e: any) => void
     disabled: boolean
 }
 
 
-const AddPatientView = ({ formSubmit, disabled }: AddPatientViewProps) => {
+const PatientCreateView = ({ formSubmit, disabled }: PatientCreateProps) => {
     return (
         <>
             <form className="flex flex-col justify-center w-2xs" onSubmit={formSubmit}>
@@ -45,4 +45,4 @@ const AddPatientView = ({ formSubmit, disabled }: AddPatientViewProps) => {
     )
 }
 
-export default AddPatientView
+export default PatientCreateView

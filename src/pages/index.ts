@@ -1,11 +1,11 @@
 import LoginPage from "./LoginPage";
 import PatientsPage from "./PatientsPage";
-import PatientAddPage  from "./PatientAddPage";
+import PatientCreatePage  from "./PatientCreatePage";
 import PatientUpdatePage from "./PatientUpdatePage";
 
 export {
     LoginPage,
     PatientsPage,
-    PatientAddPage,
+    PatientCreatePage,
     PatientUpdatePage
 }

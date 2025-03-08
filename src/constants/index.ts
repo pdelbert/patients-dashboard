@@ -1,7 +1,7 @@
 export const ROUTES = {
     LOGIN: '/',
     PATIENTS: '/patients',
-    PATIENTS_ADD: '/patients/new',
+    PATIENT_CREATE: '/patients/new',
     PATIENT_UPDATE: '/patients/:id',
 }
 
