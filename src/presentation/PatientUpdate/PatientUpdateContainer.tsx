@@ -19,11 +19,7 @@ const PatientUpdateContainer = () => {
 
     // On Mount, fetch patient Data.
     useEffect(() => {
-        const patientData: PatientDataRequest = {
-            id: params.id as string,
-            token: login.token as string
-        }
-
+        const patientData: PatientDataRequest = { id: params.id as string, token: login.token as string }
         dispatch(getPacientDataAsync(patientData));
     }, []);
 
