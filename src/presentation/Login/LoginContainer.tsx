@@ -13,7 +13,7 @@ import { loginSchema } from "../../zod";
 
 
 const LoginContainer = () => {
-    const [btnDisabled, setBtnDisabled] = useState(false);
+    const [disabled, setDisabled] = useState(false);
     const [loginResponse, setLoginResponse] = useState<LoginMessage | null>(null)
     const dispatch = useDispatch<AppDispatch>();
     const { login } = useSelector((state: RootState) => state.login);
@@ -21,7 +21,7 @@ const LoginContainer = () => {
 
     useEffect(() => {
         setTimeout(() => {
-            setBtnDisabled(false);
+            setDisabled(false);
             setLoginResponse(null);
         }, 2000);
     }, [loginResponse])
@@ -30,7 +30,7 @@ const LoginContainer = () => {
     const formSubmit = async (e: any) => {
         e.preventDefault();
 
-        setBtnDisabled(true);
+        setDisabled(true);
         const formData = new FormData(e.target);
         const formEntries: Login = {
             email: formData.get('email') as string,
@@ -52,7 +52,7 @@ const LoginContainer = () => {
     return <>
         {loginResponse?.text &&
             <Alert className={loginResponse.className} title={loginResponse.text} />}
-        <LoginView formSubmit={formSubmit} btnDisabled={btnDisabled} />
+        <LoginView formSubmit={formSubmit} disabled={disabled} />
     </>
 }
 

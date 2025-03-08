@@ -18,6 +18,7 @@ const PatientInfoView = ({ formSubmit, setPatientData, patientData, disabled }: 
                         type="text"
                         name="name"
                         className="input"
+                        disabled={disabled}
                         value={patientData?.name as string}
                         onChange={(e) => setPatientData(prev => prev ? { ...prev, name: e.target.value } : prev)}
                         placeholder="Type here" />
@@ -29,7 +30,7 @@ const PatientInfoView = ({ formSubmit, setPatientData, patientData, disabled }: 
                         type="text"
                         name="last_name"
                         className="input"
-                        placeholder="Type here"
+                        disabled={disabled}
                         value={patientData?.last_name as string}
                         onChange={(e) => setPatientData(prev => prev ? { ...prev, last_name: e.target.value } : prev)}
                     />
@@ -42,7 +43,7 @@ const PatientInfoView = ({ formSubmit, setPatientData, patientData, disabled }: 
                         type="text"
                         name="email"
                         className="input"
-                        placeholder="Type here"
+                        disabled={disabled}
                         value={patientData?.email as string}
                         onChange={(e) => setPatientData(prev => prev ? { ...prev, email: e.target.value } : prev)}
                     />
@@ -55,7 +56,7 @@ const PatientInfoView = ({ formSubmit, setPatientData, patientData, disabled }: 
                         type="text"
                         name="curp"
                         className="input"
-                        placeholder="Type here"
+                        disabled={disabled}
                         value={patientData?.curp as string}
                         onChange={(e) => setPatientData(prev => prev ? { ...prev, curp: e.target.value } : prev)}
                     />
