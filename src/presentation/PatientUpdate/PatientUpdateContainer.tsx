@@ -1,22 +1,30 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { useParams } from "react-router"
 import { useDispatch, useSelector } from "react-redux";
-import PatientUpdateView from "./PatientUpdateView"
-import { PacientsMessageResponse, Patient, PatientDataRequest } from "../../entities/patients";
-import { AppDispatch, RootState } from "../../state/store";
-import { getPacientDataAsync, UpdatePacientDataAsync } from "../../state/patientsSlice";
 import { Alert, Loading } from "../../components";
 import { patientSchema } from "../../zod";
 import { CONSTANTS } from "../../constants";
+import PatientUpdateView from "./PatientUpdateView"
+import { AppDispatch, RootState } from "../../state/store";
+import { PatientsMessageResponse, Patient, PatientDataRequest } from "../../entities/patients";
+import { getPacientDataAsync, UpdatePacientDataAsync, resetPatientResponse } from "../../state/patientsSlice";
+
 
 const PatientUpdateContainer = () => {
     const dispatch = useDispatch<AppDispatch>();
     const [disabled, setDisabled] = useState(false);
     const { login } = useSelector((state: RootState) => state.login);
-    const { patient, createdPatientResponse } = useSelector((state: RootState) => state.patients);
+
+    const { patient, patientChangeResponse } = useSelector((state: RootState) => state.patients);
     const [patientData, setPatientData] = useState<Patient | null>(null)
-    const [patientUpdateResponse, setPatientUpdateResponse] = useState<PacientsMessageResponse | null>(null)
+    const [patientUpdateResponse, setPatientUpdateResponse] = useState<PatientsMessageResponse | null>(null)
     const params = useParams();
+
+    //  Reset message response before component mount.
+    useLayoutEffect(() => {
+        dispatch(resetPatientResponse());
+    }, []);
+
 
     // On Mount, fetch patient Data.
     useEffect(() => {
@@ -32,9 +40,8 @@ const PatientUpdateContainer = () => {
 
     // Display and Hide Error or Success Message after Submission.
     useEffect(() => {
-        setPatientUpdateResponse(createdPatientResponse)
-        initialState();
-    }, [createdPatientResponse]);
+        setPatientUpdateResponse(patientChangeResponse)
+    }, [patientChangeResponse]);
 
 
     // Hide Error Message base in Zod Validation.

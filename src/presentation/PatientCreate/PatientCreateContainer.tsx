@@ -1,28 +1,35 @@
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { PacientsMessageResponse, Patient } from '../../entities/patients';
-import PatientCreateView from './PatientCreateView'
+import { PatientsMessageResponse, Patient } from '../../entities/patients';
+import PatientCreateView from './PatientCreateView';
 import { AppDispatch, RootState } from '../../state/store';
-import { createPacientsAsync } from '../../state/patientsSlice';
+import { createPacientsAsync, resetPatientResponse } from '../../state/patientsSlice';
 import { Alert } from '../../components';
-import { useEffect, useState } from 'react';
 import { patientSchema } from '../../zod';
 import { CONSTANTS } from '../../constants';
+
 
 const PatientCreateContainer = () => {
     const dispatch = useDispatch<AppDispatch>();
     const [disabled, setDisabled] = useState(false);
     const { login } = useSelector((state: RootState) => state.login);
-    const { createdPatientResponse } = useSelector((state: RootState) => state.patients);
-    const [patientResponse, setPatientResponse] = useState<PacientsMessageResponse | null>(null)
+    const { patientChangeResponse } = useSelector((state: RootState) => state.patients);
+    const [patientResponse, setPatientResponse] = useState<PatientsMessageResponse | null>(null)
+
+    //  Reset message response before component mount.
+    useLayoutEffect(() => {
+        dispatch(resetPatientResponse());
+    }, []);
 
 
     // Display Error o Success Message after Submission.
     useEffect(() => {
-        setPatientResponse(createdPatientResponse)
+        setPatientResponse(patientChangeResponse)
         initialState();
-    }, [createdPatientResponse])
+    }, [patientChangeResponse])
 
-    // Display Error Message base in Zod Validation.
+
+    // Hide Error Message base in Zod Validation.
     useEffect(() => {
         initialState();
     }, [patientResponse])

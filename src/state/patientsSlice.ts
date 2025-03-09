@@ -12,7 +12,7 @@ const initialState: PatientsState = {
         curp: null,
         active: false
     },
-    createdPatientResponse: {
+    patientChangeResponse: {
         message: "",
         statusCode: 0,
         className: ""
@@ -47,10 +47,14 @@ export const UpdatePacientDataAsync = createAsyncThunk(
     }
 );
 
-const PatientSlice = createSlice({
+const patientSlice = createSlice({
     name: 'patients',
     initialState,
-    reducers: {},
+    reducers: {
+        resetPatientResponse : (state) => {
+            state.patientChangeResponse = initialState.patientChangeResponse
+        }
+    },
     extraReducers: (builder) => {
         builder
 
@@ -73,7 +77,7 @@ const PatientSlice = createSlice({
                 action.payload && action.payload.statusCode === 400 ||
                 action.payload && action.payload.statusCode === 500
             ) {
-                state.createdPatientResponse = {
+                state.patientChangeResponse = {
                     message: action.payload.message,
                     statusCode: action.payload.statusCode,
                     className: 'alert-error'
@@ -81,7 +85,7 @@ const PatientSlice = createSlice({
                 return;
             }
 
-            state.createdPatientResponse = {
+            state.patientChangeResponse = {
                 message: action.payload.message,
                 statusCode: 200,
                 className: 'alert-success'
@@ -107,7 +111,7 @@ const PatientSlice = createSlice({
                 action.payload && action.payload.statusCode === 400 ||
                 action.payload && action.payload.statusCode === 500
             ) {
-                state.createdPatientResponse = {
+                state.patientChangeResponse = {
                     message: action.payload.message,
                     statusCode: action.payload.statusCode,
                     className: 'alert-error'
@@ -115,15 +119,16 @@ const PatientSlice = createSlice({
                 return;
             }
 
-            state.createdPatientResponse = {
+            state.patientChangeResponse = {
                 message: action.payload.message,
                 statusCode: 200,
                 className: 'alert-success'
-            } 
+            }
         });
     }
 });
 
 
-
-export default PatientSlice.reducer;
+// Action creators are generated for each case reducer function
+export const { resetPatientResponse } = patientSlice.actions
+export default patientSlice.reducer;

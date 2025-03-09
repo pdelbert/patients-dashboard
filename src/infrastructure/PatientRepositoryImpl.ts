@@ -1,9 +1,13 @@
 import  {REQUEST_URL} from "../constants";
-import { PacientsMessageResponse, Patient, PatientDataRequest, PatientRepository, RequestPatientByPagination } from "../entities/patients";
+import { 
+    Patient, 
+    PatientRepository, 
+    PatientDataRequest, 
+    PatientsMessageResponse,
+    RequestPatientByPagination 
+} from "../entities/patients";
 
 const PatientRepositoryImpl = () :PatientRepository =>  ({
-
-    
 
     all: async (requestByPagination: RequestPatientByPagination): Promise<Patient[] | null> => {
         try {
@@ -34,7 +38,7 @@ const PatientRepositoryImpl = () :PatientRepository =>  ({
         } catch (error) { return null; }
     },
 
-    create: async(patient: Patient): Promise<PacientsMessageResponse> => {
+    create: async(patient: Patient): Promise<PatientsMessageResponse> => {
         
         // Get Token from Incoming Patient Data.
         const {token} = patient;
@@ -91,7 +95,7 @@ const PatientRepositoryImpl = () :PatientRepository =>  ({
         }
     },
     
-    update: async(patient: Patient): Promise<PacientsMessageResponse> => {
+    update: async(patient: Patient): Promise<PatientsMessageResponse> => {
          
         // Get Token from Incoming Patient Data.
         const {token} = patient;

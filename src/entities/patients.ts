@@ -14,7 +14,7 @@ export interface PatientDataRequest {
     token: string
 }
 
-export interface PacientsMessageResponse {
+export interface PatientsMessageResponse {
     message: string
     className?: string
     statusCode?: number
@@ -23,7 +23,7 @@ export interface PacientsMessageResponse {
 export interface PatientsState {
     patients: Patient[];
     patient: Patient
-    createdPatientResponse: PacientsMessageResponse
+    patientChangeResponse: PatientsMessageResponse
 }
 
 export interface RequestPatientByPagination {
@@ -39,7 +39,7 @@ export interface PatientMessage {
 export interface PatientRepository {
     all: (requestByPagination: RequestPatientByPagination) => Promise<Patient[] | null>
     filterPatients?: (inputValue: string, patients: Patient[]) => Patient[]
-    create: (patient: Patient) => Promise<PacientsMessageResponse>
+    create: (patient: Patient) => Promise<PatientsMessageResponse>
     read: (patient: PatientDataRequest) => Promise<Patient | null>
-    update:(patient: Patient) => Promise<PacientsMessageResponse>
+    update:(patient: Patient) => Promise<PatientsMessageResponse>
 }

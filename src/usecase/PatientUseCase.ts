@@ -1,4 +1,4 @@
-import { PacientsMessageResponse, Patient, PatientDataRequest, PatientRepository, RequestPatientByPagination } from "../entities/patients";
+import { PatientsMessageResponse, Patient, PatientDataRequest, PatientRepository, RequestPatientByPagination } from "../entities/patients";
 import PatientRepositoryImpl from "../infrastructure/PatientRepositoryImpl";
 
 const PatientUseCase = (): PatientRepository => ({
@@ -9,7 +9,7 @@ const PatientUseCase = (): PatientRepository => ({
     },
 
     // Create New Patient.
-    create: async(patient: Patient): Promise<PacientsMessageResponse> => {
+    create: async(patient: Patient): Promise<PatientsMessageResponse> => {
         return await PatientRepositoryImpl().create(patient);
     },
 
@@ -19,7 +19,7 @@ const PatientUseCase = (): PatientRepository => ({
     },
 
     // Update Patient Data.
-    update: async(patient: Patient): Promise<PacientsMessageResponse> => { 
+    update: async(patient: Patient): Promise<PatientsMessageResponse> => { 
         return await PatientRepositoryImpl().update(patient);
     },
 

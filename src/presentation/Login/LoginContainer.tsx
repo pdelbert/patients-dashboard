@@ -10,7 +10,7 @@ import { AppDispatch, RootState } from "../../state/store";
 import LoginView from "./LoginView"
 import { Alert } from "../../components";
 import { loginSchema } from "../../zod";
-import { PacientsMessageResponse } from "../../entities/patients";
+import { PatientsMessageResponse } from "../../entities/patients";
 import { CONSTANTS } from "../../constants";
 
 
@@ -18,7 +18,7 @@ const LoginContainer = () => {
     const [disabled, setDisabled] = useState(false);
     const dispatch = useDispatch<AppDispatch>();
     const { login } = useSelector((state: RootState) => state.login);
-    const [patientResponse, setPatientsResponse] = useState<PacientsMessageResponse | null>(null)
+    const [patientResponse, setPatientsResponse] = useState<PatientsMessageResponse | null>(null)
     const navigate = useNavigate();
 
     useEffect(() => {
