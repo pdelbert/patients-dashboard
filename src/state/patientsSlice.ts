@@ -57,7 +57,7 @@ const PatientSlice = createSlice({
         // Get All Patient
         .addCase(getPacientsAsync.pending, () => {
             console.log("getPacientsAsync.pending");
-          })    
+        })    
         .addCase(getPacientsAsync.fulfilled, (state, action) => {
             if(action.payload && action.payload.length) {
                 state.patients = action.payload;

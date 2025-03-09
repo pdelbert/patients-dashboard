@@ -19,7 +19,7 @@ const PatientsContainer = () => {
     const { login } = useSelector((state: RootState) => state.login);
     const { patients } = useSelector((state: RootState) => state.patients);
 
-    // fetch patients list.
+    // fetch patients list when pagination change.
     useEffect(() => {
         dispatch(getPacientsAsync({ token: login.token as string, pagination: pagination }));
     }, [pagination]);
@@ -40,7 +40,7 @@ const PatientsContainer = () => {
         }
     }
 
-    // Redirect to add user page.
+    // Redirect to create patient page.
     const handleAddUser = () => {
         navigate(ROUTES.PATIENT_CREATE)
     }

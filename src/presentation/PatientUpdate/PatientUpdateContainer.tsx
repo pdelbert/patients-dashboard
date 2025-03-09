@@ -30,7 +30,7 @@ const PatientUpdateContainer = () => {
     }, [patient])
 
 
-    // Display Error or Success Message after Submission.
+    // Display and Hide Error or Success Message after Submission.
     useEffect(() => {
         setPatientUpdateResponse(createdPatientResponse)
         initialState();
