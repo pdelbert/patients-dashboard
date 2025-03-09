@@ -17,9 +17,17 @@ import { CONSTANTS } from "../../constants";
 const LoginContainer = () => {
     const [disabled, setDisabled] = useState(false);
     const dispatch = useDispatch<AppDispatch>();
-    const { login } = useSelector((state: RootState) => state.login);
+    const { login, loginMessage } = useSelector((state: RootState) => state.login);
     const [patientResponse, setPatientsResponse] = useState<PatientsMessageResponse | null>(null)
     const navigate = useNavigate();
+
+
+    useEffect(() => {
+        setPatientsResponse({
+            message: loginMessage.message,
+            className: loginMessage.className
+        });
+    }, [loginMessage]);
 
     useEffect(() => {
         const timer = setTimeout(() => {

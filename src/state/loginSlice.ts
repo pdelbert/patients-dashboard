@@ -8,10 +8,36 @@ const initialState: ILoginState = {
     token: null
   },
   loginMessage: {
-    text: "",
+    message: "",
     className: ""
   }
 };
+
+
+export const logOutAsync = createAsyncThunk(
+  "login/logOutAsync",
+  async () => {
+      return initialState;
+  }
+);
+
+export const loginAsync = createAsyncThunk(
+  "login/loginAsync",
+  async (login: Login) => {
+      const response = await loginUseCase().login(login);
+      if (!response) {
+        return { loginMessage : {
+          message: "Invalid Login Inputs",
+          className: 'alert-error'
+        }};
+      } 
+      
+      return {
+          email: login.email,
+          token: response?.token
+      };
+  }
+);
 
   const loginSlice = createSlice({
     name: 'login',
@@ -37,30 +63,5 @@ const initialState: ILoginState = {
         });
     }
   });
-
-  export const logOutAsync = createAsyncThunk(
-    "login/logOutAsync",
-    async () => {
-        return initialState;
-    }
-  );
-  
-  export const loginAsync = createAsyncThunk(
-    "login/loginAsync",
-    async (login: Login) => {
-        const response = await loginUseCase().login(login);
-        if (!response) {
-          return { loginMessage : {
-            text: "Login Error",
-            className: 'alert-error'
-          }};
-        } 
-        
-        return {
-            email: login.email,
-            token: response?.token
-        };
-    }
-  );
 
 export default loginSlice.reducer;

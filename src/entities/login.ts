@@ -13,7 +13,7 @@ export interface LoginState {
 }
 
 export interface LoginMessage {
-    text: string
+    message: string
     className: string
 }
 
