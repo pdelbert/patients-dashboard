@@ -22,7 +22,7 @@ const NavBar = () => {
                             <ul className="bg-base-100 w-full border border-gray-500 rounded-t-none">
                                 <li><Link to="/patients">Lista de Pacientes</Link></li>
                                 <li><Link to="/patients/new">Agregar Paciente</Link></li>
-                                <li><a onClick={handleLogOut}>LogOut</a></li>
+                                <li><a onClick={handleLogOut}>Cerrar Sesion</a></li>
                             </ul>
                         </details>
                     </li>
