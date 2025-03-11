@@ -11,7 +11,7 @@ const PatientRepositoryImpl = () :PatientRepository =>  ({
 
     all: async (requestByPagination: RequestPatientByPagination): Promise<Patient[] | null> => {
         try {
-                
+          
             const {token, pagination} = requestByPagination;
 
             const response = await fetch( `${REQUEST_URL.PATIENTS}?per_page=10&page=${pagination}`, {
@@ -19,21 +19,7 @@ const PatientRepositoryImpl = () :PatientRepository =>  ({
                 headers: {'Authorization': `Bearer ${token}`}
             });
     
-            const data = await response.json();
-            
-            const patients = data.map((patient: any) => {
-                return {
-                    id: patient.id,
-                    name: patient.user.name,
-                    last_name: patient.user.lastName,
-                    email: patient.user.email,
-                    company_id: patient.companyId,
-                    curp: patient.user.curp,
-                    active: patient.user.active
-                }
-            });
-            
-            return patients;
+            return await response.json();
             
         } catch (error) { return null; }
     },

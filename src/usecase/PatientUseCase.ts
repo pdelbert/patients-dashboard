@@ -5,7 +5,23 @@ const PatientUseCase = (): PatientRepository => ({
     
     // Get All Patients.
     all: async(requestByPagination: RequestPatientByPagination): Promise<Patient[] | null> => {
-        return await PatientRepositoryImpl().all(requestByPagination);
+        const response = await PatientRepositoryImpl().all(requestByPagination);
+
+        if (response === null) return response;
+
+        const patients = response?.map((patient: any) => {
+            return {
+                id: patient.id,
+                name: patient.user.name,
+                last_name: patient.user.lastName,
+                email: patient.user.email,
+                company_id: patient.companyId,
+                curp: patient.user.curp,
+                active: patient.user.active
+            }
+        });
+
+        return patients;
     },
 
     // Create New Patient.
