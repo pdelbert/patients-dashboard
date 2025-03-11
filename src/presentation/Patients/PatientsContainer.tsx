@@ -1,23 +1,25 @@
+import { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
+
 import PatientsView from "./PatientsView"
 import { AppDispatch, RootState } from "../../state/store";
-import { getPacientsAsync } from "../../state/patientsSlice";
-import { useEffect, useState } from "react";
+import { getPacientsAsync, nextPagination, prevPagination } from "../../state/patientsSlice";
+
 import { CONSTANTS, ROUTES } from "../../constants";
 import { Loading } from "../../components";
 import PatientUseCase from "../../usecase/PatientUseCase";
 import { Patient } from "../../entities/patients";
-import { useNavigate } from 'react-router-dom';
 
 
 const PatientsContainer = () => {
-    const [pagination, setPagination] = useState<number>(1);
+    // const [pagination, setPagination] = useState<number>(1);
     const [patientsList, setPatientsList] = useState<Patient[]>([])
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
 
     const { login } = useSelector((state: RootState) => state.login);
-    const { patients } = useSelector((state: RootState) => state.patients);
+    const { patients, pagination } = useSelector((state: RootState) => state.patients);
 
     // fetch patients list when pagination change.
     useEffect(() => {
@@ -46,7 +48,9 @@ const PatientsContainer = () => {
     }
 
     const handlePagination = (action: string) => {
-        setPagination(prev => action === 'prev' ? Math.max(prev -= 1, 1) : prev += 1);
+        action === 'next'
+            ? dispatch(nextPagination())
+            : dispatch(prevPagination());
     }
 
 

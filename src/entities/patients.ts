@@ -24,6 +24,7 @@ export interface PatientsState {
     patients: Patient[];
     patient: Patient
     patientChangeResponse: PatientsMessageResponse
+    pagination: number
 }
 
 export interface RequestPatientByPagination {

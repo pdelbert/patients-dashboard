@@ -4,6 +4,7 @@ import PatientUseCase from "../usecase/PatientUseCase";
 
 const initialState: PatientsState = {
     patients: [],
+    pagination: 1,
     patient: {
         name: "",
         last_name:  "",
@@ -16,7 +17,7 @@ const initialState: PatientsState = {
         message: "",
         statusCode: 0,
         className: ""
-    }   
+    }
 }
 
 export const getPacientsAsync = createAsyncThunk(
@@ -53,6 +54,12 @@ const patientSlice = createSlice({
     reducers: {
         resetPatientResponse : (state) => {
             state.patientChangeResponse = initialState.patientChangeResponse
+        },
+        nextPagination: (state) => {
+            state.pagination += 1;
+        },
+        prevPagination: (state) => {
+            Math.max(state.pagination -= 1, 1)
         }
     },
     extraReducers: (builder) => {
@@ -130,5 +137,5 @@ const patientSlice = createSlice({
 
 
 // Action creators are generated for each case reducer function
-export const { resetPatientResponse } = patientSlice.actions
+export const { resetPatientResponse, nextPagination, prevPagination } = patientSlice.actions
 export default patientSlice.reducer;

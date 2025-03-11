@@ -29,7 +29,7 @@ const PatientCreateContainer = () => {
     }, [patientChangeResponse])
 
 
-    // Hide Error Message base in Zod Validation.
+    // Display Error Message base in Zod Validation.
     useEffect(() => {
         initialState();
     }, [patientResponse])
