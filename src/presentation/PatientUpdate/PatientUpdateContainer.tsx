@@ -78,6 +78,8 @@ const PatientUpdateContainer = () => {
 
         const response = patientSchema.safeParse(formEntries);
 
+        console.log(formEntries);
+
         (response.success)
             ? dispatch(UpdatePacientDataAsync(formEntries))
             : setPatientUpdateResponse({ message: 'Input Error', className: 'alert-error' });
