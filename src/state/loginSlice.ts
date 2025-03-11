@@ -37,7 +37,7 @@ export const loginAsync = createAsyncThunk(
     reducers: {
       logOut : (state) => {
         state.login = initialState.login;
-        state.loginMessage = initialState.loginMessage
+        state.loginMessage = initialState.loginMessage;
       }
     },
     extraReducers: (builder) => {
