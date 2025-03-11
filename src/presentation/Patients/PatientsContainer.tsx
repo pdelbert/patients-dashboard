@@ -55,7 +55,7 @@ const PatientsContainer = () => {
 
 
     // Loading Flag Pattern.
-    if (!patients.length) return <Loading />;
+    if (!patients.length || !patientsList.length) return <Loading />;
 
     // Render PatientsView Component.
     return <div className=" p-6 pt-0 w-auto">
