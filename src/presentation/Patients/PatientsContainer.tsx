@@ -13,7 +13,6 @@ import { Patient } from "../../entities/patients";
 
 
 const PatientsContainer = () => {
-    // const [pagination, setPagination] = useState<number>(1);
     const [patientsList, setPatientsList] = useState<Patient[]>([])
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();

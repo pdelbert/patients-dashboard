@@ -13,14 +13,6 @@ const initialState: ILoginState = {
   }
 };
 
-
-export const logOutAsync = createAsyncThunk(
-  "login/logOutAsync",
-  async () => {
-      return initialState;
-  }
-);
-
 export const loginAsync = createAsyncThunk(
   "login/loginAsync",
   async (login: Login) => {
@@ -42,7 +34,11 @@ export const loginAsync = createAsyncThunk(
   const loginSlice = createSlice({
     name: 'login',
     initialState,
-    reducers: {},
+    reducers: {
+      logOut : (state) => {
+        state.login = initialState.login;
+      }
+    },
     extraReducers: (builder) => {
       builder
         .addCase(loginAsync.fulfilled, (state, action) => {
@@ -55,13 +51,8 @@ export const loginAsync = createAsyncThunk(
             state.login.token = action.payload.token
           }
         })
-
-        // LogOut.
-        .addCase(logOutAsync.fulfilled, (state) => {
-            state.login.token = null
-            state.login.email = null
-        });
-    }
+      }
   });
 
+export const { logOut } = loginSlice.actions;
 export default loginSlice.reducer;

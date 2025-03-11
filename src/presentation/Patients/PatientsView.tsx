@@ -13,7 +13,7 @@ interface PatientsViewProps {
 const PatientsView = ({ patients, tableHeader, handlerSearch, handleAddUser, handlePagination, pagination }: PatientsViewProps) => {
     return (
         <>
-            <div className="flex justify-between mt-10">
+            <div className="flex justify-between mt-6">
                 <Search handlerSearch={handlerSearch} />
                 <Button
                     className="btn-primary"

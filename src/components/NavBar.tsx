@@ -1,13 +1,17 @@
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../state/store";
-import { logOutAsync } from "../state/loginSlice";
 import { Link } from "react-router-dom";
+import { logOut } from "../state/loginSlice";
+import { resetPagination } from "../state/patientsSlice";
+import { AppDispatch, RootState } from "../state/store";
 
 const NavBar = () => {
     const dispatch = useDispatch<AppDispatch>();
     const { login } = useSelector((state: RootState) => state.login);
 
-    const handleLogOut = () => dispatch(logOutAsync());
+    const handleLogOut = () => {
+        dispatch(logOut());
+        dispatch(resetPagination());
+    };
 
     return (
         <div className="navbar sticky top-0 bg-base-100 shadow-sm">

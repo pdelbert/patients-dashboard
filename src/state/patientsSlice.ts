@@ -60,7 +60,10 @@ const patientSlice = createSlice({
         },
         prevPagination: (state) => {
             state.pagination = Math.max(state.pagination -= 1, 1)
-        }
+        },
+        resetPagination: (state) => {
+            state.pagination = 1;
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -136,6 +139,11 @@ const patientSlice = createSlice({
 });
 
 
-// Action creators are generated for each case reducer function
-export const { resetPatientResponse, nextPagination, prevPagination } = patientSlice.actions
+export const { 
+    nextPagination, 
+    prevPagination, 
+    resetPagination,
+    resetPatientResponse 
+} = patientSlice.actions
+
 export default patientSlice.reducer;
