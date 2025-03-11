@@ -59,7 +59,7 @@ const patientSlice = createSlice({
             state.pagination += 1;
         },
         prevPagination: (state) => {
-            Math.max(state.pagination -= 1, 1)
+            state.pagination = Math.max(state.pagination -= 1, 1)
         }
     },
     extraReducers: (builder) => {

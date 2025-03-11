@@ -43,8 +43,7 @@ const PatientRepositoryImpl = () :PatientRepository =>  ({
                 body: JSON.stringify({ patients: patient })
             });
     
-            const data = await response.json();
-            return data;
+            return await response.json();
             
         } catch (error) { return { statusCode: 400, message: "Request Error.." } }
     },
