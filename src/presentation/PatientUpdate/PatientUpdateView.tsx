@@ -68,7 +68,7 @@ const PatientUpdateView = ({ formSubmit, setPatientData, patientData, disabled }
                         name="curp"
                         className="input"
                         disabled={disabled}
-                        value={patientData?.curp as string}
+                        value={patientData?.curp ?? ''}
                         onChange={(e) => setPatientData(prev => prev ? { ...prev, curp: e.target.value } : prev)}
                     />
                 </fieldset>

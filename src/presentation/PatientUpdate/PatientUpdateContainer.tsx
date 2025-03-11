@@ -28,8 +28,8 @@ const PatientUpdateContainer = () => {
 
     // On Mount, fetch patient Data.
     useEffect(() => {
-        const patientData: PatientDataRequest = { id: params.id as string, token: login.token as string }
-        dispatch(getPacientDataAsync(patientData));
+        const data: PatientDataRequest = { id: params.id as string, token: login.token as string }
+        dispatch(getPacientDataAsync(data));
     }, []);
 
 
@@ -84,7 +84,7 @@ const PatientUpdateContainer = () => {
     }
 
     // Loading Flag Pattern.
-    if (patient.email.length === 0) return <Loading />;
+    if (patient.email.length === 0 || !patientData) return <Loading />;
 
     return (
         <div className=" p-6 w-auto flex justify-center items-center h-screen">
