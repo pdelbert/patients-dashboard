@@ -1,5 +1,6 @@
 import { Patient } from "../../entities/patients"
 import { Button, Pagination, Search, Table } from "../../components"
+import { CONSTANTS } from "../../constants"
 
 interface PatientsViewProps {
     patients: Patient[]
@@ -24,13 +25,17 @@ const PatientsView = ({ patients, tableHeader, handlerSearch, handleAddUser, han
 
             <div className="divider"></div>
 
-            <Table header={tableHeader} data={patients} />
+            {
+                patients.length
+                    ? <>
+                        <Table header={tableHeader} data={patients} />
+                        <div className="flex justify-center">
+                            <Pagination pagination={pagination} handlePagination={handlePagination} />
+                        </div>
+                    </>
+                    : <h1>{CONSTANTS.NOT_FOUND}</h1>
+            }
 
-            <div className="flex justify-center">
-                <Pagination
-                    pagination={pagination}
-                    handlePagination={handlePagination} />
-            </div>
 
         </>
     )

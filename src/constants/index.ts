@@ -15,7 +15,8 @@ export const CONSTANTS = {
         "CURP",
         "ACTION"
     ],
-    TIMER: 2500
+    TIMER: 2500,
+    NOT_FOUND: 'No Patient Found...'
 }
 
 export const REQUEST_URL = {

@@ -45,11 +45,13 @@ const PatientUseCase = (): PatientRepository => ({
 
         const inputValue = input.toLocaleLowerCase();
 
-        return patients.filter((patient) => {
+        const patientsFiltered =  patients.filter((patient) => {
             return patient.name.toLocaleLowerCase().includes(inputValue) ||
             patient.last_name.toLocaleLowerCase().includes(inputValue) ||
             patient.email.toLocaleLowerCase().includes(inputValue);
         });
+
+        return patientsFiltered.length ? patientsFiltered : []
     }
 })
 
