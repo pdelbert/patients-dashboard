@@ -1,17 +1,16 @@
 import { Patient } from "../../entities/patients"
-import { Button, Pagination, Search, Table } from "../../components"
+import { Button, Search, Table } from "../../components"
 import { CONSTANTS } from "../../constants"
 
 interface PatientsViewProps {
     patients: Patient[]
     tableHeader: string[]
-    pagination: number
     handleAddUser: () => void
     handlerSearch: (e: React.ChangeEvent<HTMLInputElement>) => void
     handlePagination: (action: string) => void
 }
 
-const PatientsView = ({ patients, tableHeader, handlerSearch, handleAddUser, handlePagination, pagination }: PatientsViewProps) => {
+const PatientsView = ({ patients, tableHeader, handlerSearch, handleAddUser, handlePagination }: PatientsViewProps) => {
     return (
         <>
             <div className="flex justify-between mt-6">
@@ -27,12 +26,7 @@ const PatientsView = ({ patients, tableHeader, handlerSearch, handleAddUser, han
 
             {
                 patients.length
-                    ? <>
-                        <Table header={tableHeader} data={patients} />
-                        <div className="flex justify-center">
-                            <Pagination pagination={pagination} handlePagination={handlePagination} />
-                        </div>
-                    </>
+                    ? <Table header={tableHeader} data={patients} handlePagination={handlePagination} />
                     : <h1>{CONSTANTS.NOT_FOUND}</h1>
             }
 

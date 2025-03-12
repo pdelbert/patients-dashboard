@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import PatientsView from "./PatientsView"
 import { AppDispatch, RootState } from "../../state/store";
-import { getPacientsAsync, nextPagination, prevPagination } from "../../state/patientsSlice";
+import { nextPagination, prevPagination } from "../../state/patientsSlice";
 
 import { CONSTANTS, ROUTES } from "../../constants";
 import { Loading } from "../../components";
@@ -17,13 +17,7 @@ const PatientsContainer = () => {
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
 
-    const { login } = useSelector((state: RootState) => state.login);
-    const { patients, pagination } = useSelector((state: RootState) => state.patients);
-
-    // fetch patients list when pagination change.
-    useEffect(() => {
-        dispatch(getPacientsAsync({ token: login.token as string, pagination: pagination }));
-    }, [pagination]);
+    const { patients } = useSelector((state: RootState) => state.patients);
 
     useEffect(() => {
         setPatientsList(patients)
@@ -64,7 +58,6 @@ const PatientsContainer = () => {
             patients={patientsList}
             tableHeader={CONSTANTS.TABLE_HEADER}
             handlePagination={handlePagination}
-            pagination={pagination}
         />
     </div>
 }
