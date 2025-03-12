@@ -24,10 +24,13 @@ const Table = ({ header, data, handlePagination }: TableProps) => {
         dispatch(getPacientsAsync({ token: login.token as string, pagination: pagination }));
     }, [pagination]);
 
+    const RenderPagination = handlePagination &&
+        <Pagination pagination={pagination} handlePagination={handlePagination} />
+
 
     return (
-        <>
-            <div className="overflow-x-auto">
+        <div className="flex flex-col items-center">
+            <div className="overflow-x-auto w-full">
                 <table className="table table-zebra">
                     <thead>
                         <tr>
@@ -59,14 +62,8 @@ const Table = ({ header, data, handlePagination }: TableProps) => {
                 </table>
             </div>
 
-            {
-                handlePagination &&
-                <div className="flex justify-center">
-                    <Pagination pagination={pagination} handlePagination={handlePagination} />
-                </div>
-            }
-
-        </>
+            {RenderPagination}
+        </div>
     )
 }
 
